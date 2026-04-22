@@ -38,4 +38,9 @@ public class Image {
     @Column
     @Lob
     private byte[] file;
+
+    public String getFileName() {
+        // flowers.PNG
+        return getName().concat(".").concat(getExtension().name());
+    }
 }
