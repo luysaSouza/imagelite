@@ -1,14 +1,28 @@
+'use client'
+
 import { Template, ImageCard } from '@/components'
+import { Image } from '@/resources/image/image.resource'
+import { useImageService } from '@/resources/image/image.service'
+import { useState } from 'react'
 
 export default function GaleriaPage() {
+
+    const useService = useImageService();
+    const [images, setImages] = useState<Image[]>([]);
+
+    async function searchImages() {
+        const result = await useService.buscar();
+        setImages(result);
+        console.table(result);
+    }
+
     return (
         <Template>
             <h1>Galeria</h1>
-            <section className="grid grid-cols-3 gap-8">
-                <ImageCard nome='Paisagem' tamanho='10M' dataUpload='17/05/2026' src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?utm_source=chatgpt.com'/>
-                <ImageCard nome='Estrada' tamanho='12M' dataUpload='17/05/2026' src='https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?utm_source=chatgpt.com'/>
-                <ImageCard nome='Paisagem' tamanho='10M' dataUpload='17/05/2026' src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?utm_source=chatgpt.com'/>
-                <ImageCard nome='Estrada' tamanho='12M' dataUpload='17/05/2026' src='https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?utm_source=chatgpt.com'/>
+            <button className='bg-gray-500 mb-10' onClick={searchImages}>Clique para mudar</button>
+            <section className="grid grid-cols-4 gap-8">
+
+                <ImageCard nome="{nomeImage}" tamanho='10M' dataUpload='17/05/2026' src="" />
             </section>
         </Template>
     )
