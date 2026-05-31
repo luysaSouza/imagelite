@@ -16,7 +16,7 @@ export default function GaleriaPage() {
         console.log("Valor digitado: ", query)
         const result = await useService.buscar(query, extension);
         setImages(result);
-    }
+    }   
 
     function renderImageCard(image: Image) {
         return (
@@ -24,6 +24,7 @@ export default function GaleriaPage() {
                 nome={image.name}
                 src={image.url}
                 tamanho={image.size}
+                extension={image.extension}
                 dataUpload={image.uploadDate} />
         )
     }
